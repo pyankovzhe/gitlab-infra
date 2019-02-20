@@ -5,9 +5,9 @@ provider "google" {
 
 resource "google_compute_instance" "gitlab" {
   name         = "gitlab"
-  zone    = "${var.zone}"
+  zone         = "${var.zone}"
   machine_type = "${var.machine_type}"
-  tags = ["gitlab-host", "default-allow-ssh"]
+  tags         = ["gitlab-host", "default-allow-ssh"]
 
   boot_disk {
     initialize_params {
@@ -33,7 +33,7 @@ resource "google_compute_address" "gitlab_ip" {
 }
 
 resource "google_compute_firewall" "firewall_gitlab" {
-  name = "allow-gitlab-host"
+  name    = "allow-gitlab-host"
   network = "default"
 
   allow {
@@ -42,7 +42,7 @@ resource "google_compute_firewall" "firewall_gitlab" {
   }
 
   source_ranges = "${var.gitlab_source_ranges}"
-  target_tags = ["gitlab-host"]
+  target_tags   = ["gitlab-host"]
 }
 
 resource "google_compute_firewall" "firewall_ssh" {

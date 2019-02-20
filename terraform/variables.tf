@@ -29,6 +29,7 @@ variable public_key_path {
 variable private_key_path {
   description = "Path to the private key used for ssh access"
 }
+
 variable gitlab_user {
   description = "Gitlab user"
 }
@@ -57,4 +58,3 @@ variable infra_domain {
   description = "Domain"
   default     = "example.test"
 }
-
