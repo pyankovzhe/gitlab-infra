@@ -1,0 +1,23 @@
+---
+# tasks file for gitlab
+- name: Create required directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ gitlab_admin }}"
+    group: "{{ gitlab_admin }}"
+  with_items:
+    - /srv/gitlab/config
+    - /srv/gitlab/data
+    - /srv/gitlab/logs
+
+- name: Add docker-compose.yml
+  template:
+    src: docker-compose.yml.j2
+    dest: /srv/gitlab/docker-compose.yml
+    mode: 0644
+
+- name: Run containers
+  docker_service:
+    project_src: /srv/gitlab
+    project_name: gitlab

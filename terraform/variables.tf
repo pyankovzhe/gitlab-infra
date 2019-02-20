@@ -9,7 +9,7 @@ variable region {
 
 variable zone {
   description = "Zone"
-  default     = "europe-west3-a"
+  default     = "europe-west3-c"
 }
 
 variable vm_image {
@@ -26,12 +26,35 @@ variable public_key_path {
   description = "Path to the public key used for ssh access"
 }
 
-variable firewall_ports {
-  description = "Port of the firewall rule"
-  default     = ["80", "2222", "443"]
+variable private_key_path {
+  description = "Path to the private key used for ssh access"
+}
+variable gitlab_user {
+  description = "Gitlab user"
 }
 
-variable firewall_source_ranges {
+variable gitlab_ports {
+  description = "Ports of the firewall rule"
+  default     = ["80", "443"]
+}
+
+variable gitlab_source_ranges {
   description = "Allowed IP addresses"
   default     = ["0.0.0.0/0"]
 }
+
+variable ssh_port {
+  description = "ssh port of the firewall rule"
+  default     = ["22"]
+}
+
+variable ssh_source_ranges {
+  description = "Allowed IP addresses for ssh connections"
+  default     = ["0.0.0.0/0"]
+}
+
+variable infra_domain {
+  description = "Domain"
+  default     = "example.test"
+}
+

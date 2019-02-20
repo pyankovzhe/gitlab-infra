@@ -1,5 +1,5 @@
 ---
-- name: "Gitlab: Configure environment"
+- name: "Install Docker and Docker Compose"
   hosts: all
   gather_facts: no
   become: yes

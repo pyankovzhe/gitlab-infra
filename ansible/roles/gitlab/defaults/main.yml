@@ -1,0 +1,4 @@
+---
+# defaults file for gitlab
+gitlab_url: http://gitlab.dev-dev.space
+gitlab_admin: appuser

@@ -1,2 +1,0 @@
-[gitlab]
-gitlabserver ansible_ssh_host=
