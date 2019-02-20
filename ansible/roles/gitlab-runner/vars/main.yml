@@ -1,0 +1,3 @@
+---
+# set runner_token as extra var
+gitlab_runner_token: "{{ runner_token }}"

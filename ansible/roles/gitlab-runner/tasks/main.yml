@@ -1,0 +1,35 @@
+---
+- name: Run Gitlab Runner in container
+  docker_container:
+    name: gitlab-runner
+    image: gitlab/gitlab-runner:latest
+    state: started
+    restart: yes
+    restart_policy: always
+    volumes:
+      - /srv/gitlab-runner/config:/etc/gitlab-runner
+      - /var/run/docker.sock:/var/run/docker.sock
+  tags: setup
+
+- name: Register Gitlab Runner
+  docker_container:
+    name: runner-register
+    image: gitlab/gitlab-runner:latest
+    detach: no
+    cleanup: yes
+    interactive: yes
+    tty: yes
+    command: >
+      register
+      --non-interactive
+      --executor 'docker'
+      --docker-image 'alpine:latest'
+      --url {{ gitlab_url }}
+      --registration-token {{ gitlab_runner_token }}
+      --description 'docker-runner'
+      --tag-list 'docker,gcp'
+      --run-untagged
+      --locked='false'
+    volumes:
+      - /srv/gitlab-runner/config:/etc/gitlab-runner
+  tags: registr

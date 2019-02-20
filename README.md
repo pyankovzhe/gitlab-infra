@@ -3,18 +3,29 @@
 Create pre-baked image with Docker and Docker Compose.
 
 ```sh
-packer build -var 'project_id=example-project' -var 'source_image=ubuntu-1604-xenial-v20170815a' -var 'tags=gitlab' packer/gitlab.json
+packer build -var 'project_id=example-project' -var 'source_image=ubuntu-1604-xenial-v20170815a' -var 'tags=docker' ubuntu-docker.json
 ```
 
 ### Create vm on GCP with Terraform
 
-Run from terraform directory
 ```sh
 terraforn apply
 ```
 
-### Install and configure Gitlab with ansible playbooks
+### Install and configure Gitlab
 
 ```sh
-ansible-playbook ansible/site.yml --check
+ansible-playbook gitlab.yml
+```
+
+### Setup Gitlab Runner
+
+Run GitLab Runner in container
+```sh
+ansible-playbook gitlab-runner.yml --tags "setup"
+```
+
+Register GitLab Runner
+```sh
+ansible-playbook gitlab-runner.yml --tags "registration" --extra-vars "runner_token=TOKEN"
 ```

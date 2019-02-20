@@ -4,5 +4,5 @@
   become: yes
 
   roles:
-    - gitlab
-
+  - role: gitlab
+    tags: gitlab-ci
